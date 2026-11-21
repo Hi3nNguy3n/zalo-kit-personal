@@ -1,0 +1,19 @@
+{
+  "name": "zalo-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cầu nối Zalo cá nhân (zca-js) cho Agent: đăng nhập bằng quét mã QR, lắng nghe và gửi tin nhắn Zalo qua HTTP tới backend Python.",
+  "main": "bot.js",
+  "scripts": {
+    "login": "node login_qr.js",
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "zca-js": "^2.2.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
