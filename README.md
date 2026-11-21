@@ -24,7 +24,6 @@ zalo_integration_kit/
 │   ├── login_qr.js      # Chạy 1 lần để quét QR đăng nhập
 │   └── bot.js            # Chạy liên tục: lắng nghe + gửi tin Zalo thật
 ├── zalo_server.py        # Server Python, nối Zalo vào Agent của bạn
-├── n8n-nodes-zalo-personal/   # Tùy chọn: dùng n8n thay cho zalo_server.py (xem mục 8)
 ├── .env.example
 └── .gitignore
 ```
@@ -112,25 +111,6 @@ File `.env` cần đặt ở cùng thư mục với `zalo_server.py` **và** đ�
   { "thread_id": "<uid hoặc group id>", "thread_type": 0, "text": "Nội dung" }
   ```
   (`thread_type`: `0` = tin riêng, `1` = tin nhóm)
-
-## 8. Tùy chọn: dùng n8n thay cho `zalo_server.py` (mỗi nghiệp vụ = 1 node)
-
-Nếu Agent của bạn chạy trên n8n, có thể bỏ qua hoàn toàn `zalo_server.py` và
-dùng thư mục [`n8n-nodes-zalo-personal/`](n8n-nodes-zalo-personal/README.md) —
-một community node package thật (TypeScript), gồm 2 node:
-
-| Node | Thay thế cho |
-|---|---|
-| **Zalo Trigger** | `POST /incoming` của `zalo_server.py` |
-| **Zalo Send Message** | `POST /send` / hàm `reply_to_zalo()` của `zalo_server.py` |
-
-`zalo_bridge/bot.js` giữ nguyên không đổi — chỉ đổi `ZALO_PYTHON_WEBHOOK_URL`
-trỏ sang URL webhook của node **Zalo Trigger**. Việc đăng nhập QR (`login_qr.js`)
-không có node tương ứng vì cần người quét QR bằng tay, không hợp với mô hình
-node chạy tự động trong workflow — xem chi tiết lý do trong README của package.
-
-Xem hướng dẫn cài đặt & thiết lập workflow đầy đủ tại
-[`n8n-nodes-zalo-personal/README.md`](n8n-nodes-zalo-personal/README.md).
 
 ## Lưu ý quan trọng
 - `zca-js` là thư viện Zalo cá nhân **không chính thức**, có rủi ro bị Zalo giới
